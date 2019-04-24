@@ -136,8 +136,12 @@ class Caldera_Forms_Admin {
 			add_action( "wp_ajax_toggle_form_state", array( $this, 'toggle_form_state' ) );
 			add_action( "wp_ajax_save_cf_setting", array( $this, 'save_cf_setting' ) );
 			add_action( "wp_ajax_cf_dismiss_pointer", array( $this, 'update_pointer' ) );
-			add_action( "wp_ajax_cf_bulk_action", array( $this, 'bulk_action' ) );
 		}
+		// 2019-04-24 BW Always add ajax cf_bulk_action (was previously inside the above 'admin' check).
+		//               This is needed to allow trash/restore buttons to work in Entries viewer for non-admin users. 
+		//               bulk_action() does its own capability checks anyway.
+		add_action( "wp_ajax_cf_bulk_action", array( $this, 'bulk_action' ) );
+
 		add_action("wp_ajax_cf_get_form_preview", array( $this, 'get_form_preview') );
         add_action( 'admin_footer', array( $this, 'add_shortcode_inserter'));
 
@@ -482,9 +486,14 @@ class Caldera_Forms_Admin {
 					$selectors[] = '#entry_row_' . (int) $item_id;
 				}
 
+				// 2019-04-24 BW Get the form ID; capabilities depend on it if we are not admin
+				//               Basic sanitisation is done as I'm not sure how careful CF is.
+				$form = preg_replace('/[^0-9A-Fa-f]/', '', $_POST['form']);
+
 				switch ( $do_action ) {
 					case 'delete':
-						if( current_user_can( Caldera_Forms::get_manage_cap( 'delete-entry' ) ) ){
+						// 2019-04-24 BW Add $form to capability check
+						if( current_user_can( Caldera_Forms::get_manage_cap( 'delete-entry', $form ) ) ){
 							$result = Caldera_Forms_Entry_Bulk::delete_entries( $items );
 						}
 						$out['status'] = 'reload';
@@ -492,7 +501,8 @@ class Caldera_Forms_Admin {
 						break;
 
 					default:
-						if( current_user_can( Caldera_Forms::get_manage_cap( 'edit-entry' ) ) ){
+						// 2019-04-24 BW Add $form to capability check
+						if( current_user_can( Caldera_Forms::get_manage_cap( 'edit-entry', $form ) ) ){
 							$result = Caldera_Forms_Entry_Bulk::change_status( $items, $do_action  );
 						}
 						break;
