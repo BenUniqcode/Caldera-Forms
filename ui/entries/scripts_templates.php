@@ -343,9 +343,11 @@ if( ! defined( 'ABSPATH' ) ){
 
 <script type="text/html" id="view-entry-tmpl">
 	{{#if user}}
+	<!--
 	<div class="user-avatar user-avatar-{{user/ID}}"{{#if user/name}} title="{{user/name}}"{{/if}} style="margin-top:-1px;">
 	{{{user/avatar}}}
 	</div>
+	-->
 	{{/if}}
 
 	<div id="main-entry-panel" class="tab-detail-panel" data-tab="<?php esc_html_e('Entry', 'caldera-forms' ); ?>">
