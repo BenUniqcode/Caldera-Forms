@@ -3815,6 +3815,10 @@ class Caldera_Forms
 				}
 
 			}
+			// 2019-04-26 BW Filter out fields with unset values, or with a slug that begins with an underscore
+			if (substr($field['slug'], 0, 1) == '_' || empty($field_value)) {
+				continue;
+			}
 
 			$data['data'][$field_id] = array(
 				'label' => $field['label'],
