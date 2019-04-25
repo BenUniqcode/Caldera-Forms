@@ -31,7 +31,7 @@ class Caldera_Forms_Entry_Viewer {
 	 *
 	 * @since 1.5.0
 	 */
-	public static function print_scripts(){
+	public static function print_scripts($form = false){
 		include CFCORE_PATH . 'ui/entries/scripts_templates.php';
 	}
 
@@ -77,19 +77,16 @@ class Caldera_Forms_Entry_Viewer {
 	 *
 	 * @return string
 	 */
-	public static function form_entry_viewer_1( $form_id, $with_toolbar = false ){
+	// 2019-04-25 BW Pass in the $form array, not the form ID.
+	public static function form_entry_viewer_1( $form, $with_toolbar = false ){
 		Caldera_Forms_Admin_Assets::admin_common();
 
-
 		$viewer = self::full_viewer( $with_toolbar );
-		$viewer .= self::entry_trigger( $form_id );
-		if( ! did_action( 'wp_footer' ) ){
-			add_action( 'wp_footer', array( __CLASS__, 'print_scripts' ) );
-		}else{
-			ob_start();
-			self::print_scripts();
-			$viewer .= ob_get_clean();
-		}
+		$viewer .= self::entry_trigger( $form['ID'] );
+		// 2019-04-25 BW Always print the scripts now, so we can pass the $form in
+		ob_start();
+		self::print_scripts($form);
+		$viewer .= ob_get_clean();
 
 		return $viewer;
 

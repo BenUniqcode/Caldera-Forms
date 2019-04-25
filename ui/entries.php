@@ -37,7 +37,7 @@ if( isset( $_GET[ 'cf-alt-viewer' ] ) ){
 </div>
 
 <?php
-Caldera_Forms_Entry_Viewer::print_scripts();
+Caldera_Forms_Entry_Viewer::print_scripts($form);
 ?>
 
 <?php

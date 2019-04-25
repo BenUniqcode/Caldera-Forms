@@ -325,7 +325,7 @@ if( ! defined( 'ABSPATH' ) ){
 				{{/each}}
 				<td style="text-align: right; width: 100px;white-space: nowrap;">
 					<?php
-						do_action('caldera_forms_entry_actions');
+						do_action('caldera_forms_entry_actions', $form);
 					?>
 				</td>
 			</tr>
