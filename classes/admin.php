@@ -1068,8 +1068,8 @@ class Caldera_Forms_Admin {
 		if( current_user_can( Caldera_Forms::get_manage_cap() ) ){
 
 			$this->screen_prefix[] = add_menu_page(
-				__('Caldera Forms', 'caldera-forms' ),
-				__('Caldera Forms', 'caldera-forms' ),
+				__('Room Bookings', 'caldera-forms' ),
+				__('Room Bookings', 'caldera-forms' ),
 				Caldera_Forms::get_manage_cap(),
 				$this->plugin_slug, array( $this, 'render_admin' ),
 				'dashicons-cf-logo',
@@ -1088,7 +1088,7 @@ class Caldera_Forms_Admin {
 
 						$this->screen_prefix[] 	 = add_submenu_page(
 							$this->plugin_slug,
-							__('Caldera Forms', 'caldera-forms' ).' - ' . $form['name'], '- '.$form['name'],
+							__('Room Bookings', 'caldera-forms' ).' - ' . $form['name'], '- '.$form['name'],
 							Caldera_Forms::get_manage_cap(), $this->plugin_slug . '-pin-' . $form_id, array( $this, 'render_admin' )
 						);
 					}
@@ -1147,11 +1147,11 @@ class Caldera_Forms_Admin {
 						if( empty( $this->screen_prefix ) ){
 							// make top menu
 							$main_slug = $this->plugin_slug . '-pin-' . $form_id;
-							$this->screen_prefix[] = add_menu_page( __('Caldera Forms', 'caldera-forms' ), __('Caldera Forms', 'caldera-forms' ), $capability, $main_slug, array( $this, 'render_admin' ), 'dashicons-cf-logo', 52.999 );
+							$this->screen_prefix[] = add_menu_page( __('Room Bookings', 'caldera-forms' ), __('Room Bookings', 'caldera-forms' ), $capability, $main_slug, array( $this, 'render_admin' ), 'dashicons-cf-logo', 52.999 );
 
 						}
 
-						$this->screen_prefix[] 	 = add_submenu_page( $main_slug, __('Caldera Forms', 'caldera-forms' ).' - ' . $form['name'], $form['name'], $capability, $this->plugin_slug . '-pin-' . $form_id, array( $this, 'render_admin' ) );
+						$this->screen_prefix[] 	 = add_submenu_page( $main_slug, __('Room Bookings', 'caldera-forms' ).' - ' . $form['name'], $form['name'], $capability, $this->plugin_slug . '-pin-' . $form_id, array( $this, 'render_admin' ) );
 
 					}
 				}

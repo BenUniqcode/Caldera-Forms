@@ -1,13 +1,13 @@
 <?php
 /*
-  Plugin Name: Caldera Forms
-  Plugin URI: https://CalderaForms.com
+  Plugin Name: Caldera Forms Modified For SilverBox
+  Plugin URI: https://uniqcode.com
   Description: Easy to use, grid based responsive form builder for creating simple to complex forms.
   Author: Caldera Labs
   Version: 1.8.4
   Author URI: http://CalderaLabs.org
   Text Domain: caldera-forms
-  GitHub Plugin URI: https://github.com/CalderaWP/caldera-forms
+  GitHub Plugin URI: https://github.com/BenUniqCode/caldera-forms
 */
 
 
